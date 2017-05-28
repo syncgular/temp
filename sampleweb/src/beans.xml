@@ -1,11 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
     
-    
-    
-    
-  </beans>
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+     
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<context:annotation-config></context:annotation-config>
+
+	<bean id='post1' name='post1' class="com.util.Post">
+		<constructor-arg name="post" value="Hello World"></constructor-arg>
+		<property name="like_count" value="10"></property>
+	</bean>
+
+	<bean id="post" name="post" class="com.util.Post">
+	</bean>
+
+
+	<bean id="post2" name="post2" class="com.util.Post">
+		<property name="cityList">
+			<list>
+				<value>Mumbai</value>
+				<value>Mumbai</value>
+			</list>
+		</property>
+
+		<property name="citySet">
+			<set>
+				<value>Mumbai</value>
+				<value>Mumbai</value>
+			</set>
+		</property>
+
+		<property name="cityMap">
+			<map>
+				<entry key="name" value="Affixus"></entry>
+				<entry key="id" value="1"></entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="cid" name="cid" class="com.util.Comment">
+		<property name="text" value="Hello World"></property>
+	</bean>
+
+	<bean id="post3" name="post3" class="com.util.Post">
+		<property name="comment" ref="cid"></property>
+	</bean>
+
+
+	<bean id="post4" name="post4" class="com.util.Post" autowire="byType">
+	</bean>
+
+
+
+
+	<bean id="post5" name="post5" class="com.util.Post">
+	</bean>
+
+
+</beans>
