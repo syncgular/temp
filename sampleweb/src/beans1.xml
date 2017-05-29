@@ -15,10 +15,9 @@
     http://www.springframework.org/schema/aop 
     http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<context:annotation-config></context:annotation-config>
+	<bean id='post2' name='post2' class="com.util.component.Post">
+		<constructor-arg name="post" value="Hello World"></constructor-arg>
+		<property name="like_count" value="10"></property>
+	</bean>
 
-	<context:component-scan base-package="com.util.component"></context:component-scan>
-    <context:component-scan base-package="com.util.compoTemp"></context:component-scan>
-    
-    
 </beans>

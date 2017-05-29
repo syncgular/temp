@@ -3,6 +3,8 @@ package com.helloworld.web;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import com.util.component.Post;
 @Controller
 @RequestMapping("/ctrl1")
 public class ResfulSpringDemo {
+	public static ApplicationContext context = new ClassPathXmlApplicationContext("beans1.xml");
 
 	@ResponseBody
 	@RequestMapping(value = "/hello1", method = RequestMethod.GET)
@@ -34,6 +37,15 @@ public class ResfulSpringDemo {
 	
 	@PostMapping("/hello5")
 	public ResponseEntity<List<Post>> sayHello5(@RequestBody Post post) {
+		
+		
+		List<Post> postList = Collections.singletonList(post);
+		return new ResponseEntity<>(postList, HttpStatus.OK);
+	}
+	
+	@GetMapping("/hello6")
+	public ResponseEntity<List<Post>> sayHello6() {
+		Post post = (Post)context.getBean("post2");
 		
 		List<Post> postList = Collections.singletonList(post);
 		return new ResponseEntity<>(postList, HttpStatus.OK);
