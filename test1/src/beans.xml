@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
@@ -14,10 +13,13 @@
    http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<context:component-scan base-package="com.spring"></context:component-scan>
+	<context:component-scan base-package="com.aspects"></context:component-scan>
 	<context:annotation-config></context:annotation-config>
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
 
-	<bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<bean name="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/dac2017" />
 		<property name="username" value="root" />
@@ -31,21 +33,28 @@
 	<bean id="employeeDao" name="employeeDao" class="com.spring.EmployeeDao">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
-	
-	
+
+
 	<bean id="helloAspect" name="helloAspect" class="com.aspects.HelloAspect">
+	</bean>
+
+
+	<bean id="helloAspectAnnotate" name="helloAspectAnnotate" class="com.aspects.HelloAspectAnnotate">
 	</bean>
 
 	<aop:config>
 		<aop:aspect id="HelloAspectId1" ref="helloAspect">
-			<aop:pointcut id="pid1" expression="execution( * com.spring.EmployeeDao.*(..))" />
-			
+			<aop:pointcut id="pid1"
+				expression="execution( * com.spring.EmployeeDao.*(..))" />
+
 			<aop:before method="before" pointcut-ref="pid1" />
 			<aop:after method="after" pointcut-ref="pid1" />
-			<aop:around method="around" pointcut-ref="pid1"/>
-			
-			<aop:before method="beforeAdvOption1" pointcut="execution( * com.spring.EmployeeDao.option1(..)) and args(param1)"/>
-			<aop:before method="beforeAdvOption2" pointcut="execution( * com.spring.EmployeeDao.option2(..)) and args(param1, param2)"/>
+			<aop:around method="around" pointcut-ref="pid1" />
+
+			<aop:before method="beforeAdvOption1"
+				pointcut="execution( * com.spring.EmployeeDao.option1(..)) and args(param1)" />
+			<aop:before method="beforeAdvOption2"
+				pointcut="execution( * com.spring.EmployeeDao.option2(..)) and args(param1, param2)" />
 		</aop:aspect>
 	</aop:config>
 
