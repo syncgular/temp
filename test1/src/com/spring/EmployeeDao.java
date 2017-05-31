@@ -56,4 +56,11 @@ public class EmployeeDao {
 	}
 	
 	
+	public void option1(String str) {
+		System.out.println("OPTION1");
+	}
+	
+	public void option2(String str, int i) {
+		System.out.println("OPTION2");
+	}
 }

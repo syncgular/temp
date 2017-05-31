@@ -23,5 +23,9 @@ public class MAIN {
 		
 		edao.create();
 		
+		
+		edao.option1("1");
+		edao.option2("11", 1);
+		
 	}
 }
